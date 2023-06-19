@@ -1,24 +1,23 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const fileInput = document.querySelector<HTMLInputElement>('#file-input')!
+const fileDisplay = document.querySelector('canvas')!
+const textInput = document.querySelector<HTMLInputElement>('#text-input')!
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const ctx = fileDisplay.getContext('2d')!
+
+// when file input changes, display the image on the canvas (resize canvas if needed)
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files![0]
+  const reader = new FileReader()
+  reader.onload = () => {
+    const img = new Image()
+    img.onload = () => {
+      fileDisplay.width = img.width
+      fileDisplay.height = img.height
+      ctx.drawImage(img, 0, 0)
+    }
+    img.src = reader.result as string
+  }
+  reader.readAsDataURL(file)
+});
