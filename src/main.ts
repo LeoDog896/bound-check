@@ -21,3 +21,24 @@ fileInput.addEventListener('change', () => {
   }
   reader.readAsDataURL(file)
 });
+
+textInput.addEventListener('input', () => {
+  // change from percentage to pixels
+  const [x, y, width, height] = textInput.value.split(' ').map(Number).map((num, i) => {
+    num = i > 1 ? num : (1 - num)
+    if (i % 2 === 0) {
+      return num * fileDisplay.width
+    } else {
+      return num * fileDisplay.height
+    }
+  });
+
+  console.log(x, y, width, height)
+
+  // draw a rectangle on the canvas
+  ctx.beginPath()
+  ctx.rect(x, y, width, height)
+  ctx.lineWidth = 5
+  ctx.strokeStyle = 'red'
+  ctx.stroke()
+})
