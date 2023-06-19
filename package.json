@@ -1,11 +1,11 @@
 {
-  "name": "bound-check",
+  "name": "yolov5-bound-check",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base /yolov5-bound-check/",
     "preview": "vite preview"
   },
   "devDependencies": {
