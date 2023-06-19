@@ -23,7 +23,6 @@ fileInput.addEventListener('change', () => {
 });
 
 textInput.addEventListener('input', () => {
-  // change from percentage to pixels
   const [x, y, width, height] = textInput.value.split(' ').map(Number).map((num, i) => {
     num = i > 1 ? num : (1 - num)
     if (i % 2 === 0) {
